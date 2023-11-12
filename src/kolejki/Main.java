@@ -59,7 +59,8 @@ public class Main {
         }
 
         // TODO: uzupelnij notatke, podaj jakis przyklad o kolejkach priorytetowych
-        //kolejka priorytetowa
+        //kolejka priorytetowa - kolejka, w ktorej pobieranie elementow odbywa sie na podstawie jakiegos kryterium (domyslnie rosnaco)
+        //mozna podac komparator do konstruktora z kryterium porowanania
         PriorityQueue<Integer> queue2 = new PriorityQueue<>();
         queue2.offer(1);
         queue2.offer(10);
@@ -68,7 +69,6 @@ public class Main {
         queue2.offer(3);
         queue2.offer(30);
 
-
         List<Integer> list = new ArrayList<>();
         while (!queue2.isEmpty()) {
             list.add(queue2.poll());
@@ -76,5 +76,19 @@ public class Main {
 
         System.out.println(list);
 
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Comparator.reverseOrder());
+        priorityQueue.offer(1);
+        priorityQueue.offer(10);
+        priorityQueue.offer(2);
+        priorityQueue.offer(20);
+        priorityQueue.offer(3);
+        priorityQueue.offer(30);
+
+        List<Integer> list2 = new ArrayList<>();
+        while (!priorityQueue.isEmpty()) {
+            list2.add(priorityQueue.poll());
+        }
+
+        System.out.println(list2);
     }
 }
