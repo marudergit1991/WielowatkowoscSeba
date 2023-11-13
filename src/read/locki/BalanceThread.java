@@ -1,13 +1,13 @@
 package read.locki;
 
-import java.time.Duration;
-
 public class BalanceThread extends Thread {
 
     private Balance balance;
+    private boolean method;
 
-    public BalanceThread(Balance balance) {
+    public BalanceThread(Balance balance, boolean method) {
         this.balance = balance;
+        this.method = method;
         this.start();
     }
 
@@ -15,11 +15,14 @@ public class BalanceThread extends Thread {
         for (int i = 0; i < 100; i++) {
 
             System.out.println(getBalance().getData());
-            //balance.metodaSync();
 
-            balance.metodaLock();
+            if (method) {
+                balance.metodaSync();
+            }
 
-
+            if (!method) {
+                balance.metodaLock();
+            }
         }
     }
 

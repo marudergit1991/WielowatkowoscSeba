@@ -20,10 +20,9 @@ public class Balance {
     }
 
     public void metodaLock() {
-
+        lock.lock();
         try {
-            lock.lock();
-            //Thread.sleep(Duration.ofMillis(10000));
+                        //Thread.sleep(Duration.ofMillis(10000));
             //System.out.println(getData());
             this.setData(getData() - 1);
         } finally {

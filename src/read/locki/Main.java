@@ -9,21 +9,36 @@ public class Main {
 
         //Balance posiada zmienna intowa oraz locka i ma dwie metody jedna z uzyciem synchro a druga z lockami
 
-        long start = System.currentTimeMillis();
-        int iloscWatkow = 1000;
+        long startSynchro = System.currentTimeMillis();
+        int iloscWatkow = 100;
 
 
         BalanceThread[] balanceThreads = new BalanceThread[iloscWatkow];
         Balance balance = new Balance(100);
         for (int i = 0; i < iloscWatkow; i++) {
-            balanceThreads[i] = new BalanceThread(balance);
+            balanceThreads[i] = new BalanceThread(balance, true);
         }
 
         for (int i = 0; i < iloscWatkow; i++) {
             balanceThreads[i].join();
         }
 
-        long stop = System.currentTimeMillis();
-        System.out.println("czas: " + (stop - start));
+        long stopSynchro = System.currentTimeMillis();
+
+
+        long startLock = System.currentTimeMillis();
+
+        for (int i = 0; i < iloscWatkow; i++) {
+            balanceThreads[i] = new BalanceThread(balance, false);
+        }
+
+        for (int i = 0; i < iloscWatkow; i++) {
+            balanceThreads[i].join();
+        }
+
+        long stopLock = System.currentTimeMillis();
+        System.out.println("czas Synchro: " + (stopLock - startLock));
+        System.out.println("czas Lock: " + (stopSynchro - startSynchro));
+
     }
 }
